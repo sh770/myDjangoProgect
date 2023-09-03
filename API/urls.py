@@ -6,11 +6,12 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
-
 urlpatterns = [
     path('', views.getRoutes, name="routes"),
     path('received-messages/', views.getReceivedMessages, name='received'),
     path('received-messages/<int:id>', views.getReceivedMessage, name='receivedOne'),
+    path('add-message/', views.addMessage, name="addOne"),
+    
     
     #Register
     path('signup/', views.signUp, name="signup"),
