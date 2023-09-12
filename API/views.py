@@ -1,5 +1,5 @@
 from django.shortcuts import render
-# from django.http import JsonResponse
+#from django.http import JsonResponse
 from django.db.models import Q
 from rest_framework.exceptions import PermissionDenied
 from rest_framework import status
@@ -84,18 +84,18 @@ def getRoutes(request):
 def getReceivedMessages(request):
     try:
         receiver = request.user.id
-        messages = Message.objects.filter(receiver = receiver)
-            
+        messages = Message.objects.filter(receiver=receiver)
+
         if not messages:
-            return Response({"message":"no messages found for user"} ,status=status.HTTP_404_NOT_FOUND) 
-            
+            # Handle the case where no messages are found
+            return Response({"message": "No messages found for this user."}, status=status.HTTP_404_NOT_FOUND)
+
         serializer = MessageSerializer(messages, many=True)
-        return Response (serializer.data) 
-        
+        return Response(serializer.data)
+
     except Exception as e:
-            return Response({"message":str(e)},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        
-        
+        # Handle any unexpected exceptions
+        return Response({"message": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR) 
 
 # get a message
 @api_view(['GET'])
