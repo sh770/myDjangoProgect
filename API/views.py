@@ -82,17 +82,17 @@ def getRoutes(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def getReceivedMessages(request):
-        try:
-            receiver = request.user.id
-            messages = Message.objects.filter(receiver = receiver)
+    try:
+        receiver = request.user.id
+        messages = Message.objects.filter(receiver = receiver)
             
-            if not messages:
-                return Response({"message":"no messages found for user"} ,status=status.HTTP_404_NOT_FOUND) 
+        if not messages:
+            return Response({"message":"no messages found for user"} ,status=status.HTTP_404_NOT_FOUND) 
             
-            serializer = MessageSerializer(messages, many=True)
-            return Response (serializer.data) 
+        serializer = MessageSerializer(messages, many=True)
+        return Response (serializer.data) 
         
-        except Exception as e:
+    except Exception as e:
             return Response({"message":str(e)},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
         
