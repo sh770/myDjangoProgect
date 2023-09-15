@@ -150,3 +150,85 @@ def deleteMessage(request,id):
         return Response({"message": str(e)}, status=status.HTTP_403_FORBIDDEN)  # Return custom error message for permissions
     except Exception as e:
         return Response({"message": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+    
+#get sent meseges
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getSentMessages(request):
+    user = request.user
+    try:
+        messages = Message.objects.filter(sender = user)
+        if not messages:
+            return Response({"message":"no messages here"},status=status.HTTP_404_NOT_FOUND)
+        
+        serializer = MessageSerializer(messages, many=True)
+        return Response(serializer.data)
+    except Exception as e:
+        return Response({"message": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+    
+#get Unread Messages
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getUnreadMessages(request):
+    receiver = request.user
+    try:
+        messages = Message.objects.filter(receiver = receiver).filter(unread=True)
+        if not messages:
+            return Response({"message":"no messages here"},status=status.HTTP_404_NOT_FOUND)
+        serializer = MessageSerializer(messages, many=True)
+        return Response(serializer.data)
+    except Exception as e:
+        return Response({"message": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+
+
+
+#get read Messages
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getReadMessages(request):
+    receiver = request.user
+    try:
+        messages = Message.objects.filter(receiver = receiver).filter(unread=False)
+        if not messages:
+            return Response({"message":"no messages here"},status=status.HTTP_404_NOT_FOUND)
+        serializer = MessageSerializer(messages, many=True)
+        return Response(serializer.data)
+    except Exception as e:
+        return Response({"message": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+
+#getting a single, yet unread message, and reversing it to "read"
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def readAMessage(request,id):
+    receiver = request.user
+    try:
+        message = Message.objects.filter(Q(receiver=receiver)).get(id=id)
+        message.unread=False
+        message.save()
+        serializer = MessageSerializer(message)
+        return Response(serializer.data)
+    except Message.DoesNotExist:
+        return Response({"message": "Message not found."}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({"message": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+#reversing unread message  to "read"
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def unReadAMessage(request,id):
+    receiver = request.user
+    try:
+        message = Message.objects.filter(Q(receiver=receiver)).get(id=id)
+        message.unread=True
+        message.save()
+        serializer = MessageSerializer(message)
+        return Response(serializer.data)
+    except Message.DoesNotExist:
+        return Response({"message": "Message not found."}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({"message": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)    
