@@ -15,15 +15,28 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# from dj_database_url import dj-database-url
+
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+SECRET_KEY = os.environ.get('SECRET_KEY')
+
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-vumrfnkxvxp!3v!3$&^6fu1og0_m$4q8eu1h$9r@kz$=+lz==t'
-
+# SECRET_KEY = 'django-insecure-vumrfnkxvxp!3v!3$&^6fu1og0_m$4q8eu1h$9r@kz$=+lz==t'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
+
+# Raises Django's ImproperlyConfigured
+# exception if SECRET_KEY not in os.environ
 
 ALLOWED_HOSTS = []
 
@@ -41,7 +54,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
-]
+    ]
 
 REST_FRAMEWORK = {
     
@@ -118,6 +131,7 @@ WSGI_APPLICATION = 'SYSTEMMESEGES.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
+    	
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
