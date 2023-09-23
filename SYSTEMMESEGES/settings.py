@@ -88,7 +88,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
-    'django.contrib.staticfiles'
+    'django.contrib.staticfiles',
     ]
 
 REST_FRAMEWORK = {
