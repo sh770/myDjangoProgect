@@ -1,49 +1,17 @@
-pip install virtualenv
-virtualenv env
-.\env\Scripts\activate
-pip install django
-django-admin startproject SYSTEMMESEGES
-## py manage.py runserver
-python manage.py runserver
-python manage.py startapp API
-
-routes = [
-        {
-            'Endpoint': '/received-messages/',
-            'method': 'GET',
-            'body': None,
-            'description': 'Returns an array of received messages'
-        },
-        {
-            'Endpoint': '/add-message/',
-            'method': 'POST',
-            'body': {'body': ""},
-            'description': 'Creates new message with data sent in post request'
-        },
-        {
-            'Endpoint': '/delete-message/id/',
-            'method': 'DELETE',
-            'body': None,
-            'description': 'Deletes and exiting message'
-        },
-    ]
-
-python .\manage.py makemigrations
-python .\manage.py migrate
-
-python .\manage.py createsuperuser
-
-
-python -m pip install djangorestframework
-
-pip show djangorestframework
-
-#add to views.py
-from rest_framework.response import Response
-from rest_framework.decorators import api_view
-
-
-==================================
-
-react
-npx create-react-app frontend-sys
+asgiref==3.7.2
+dj-database-url==2.1.0
+Django==4.2.5
+django-cors-headers==4.2.0
+django-environ==0.11.2
+djangorestframework==3.14.0
+djangorestframework-simplejwt==5.3.0
+gunicorn==21.2.0
+packaging==23.1
+psycopg==3.1.11
+psycopg2-binary==2.9.7
+PyJWT==2.8.0
+pytz==2023.3
+setuptools==68.2.2
+sqlparse==0.4.4
+typing_extensions==4.8.0
+tzdata==2023.3

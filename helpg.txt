@@ -1,0 +1,49 @@
+pip install virtualenv
+virtualenv env
+.\env\Scripts\activate
+pip install django
+django-admin startproject SYSTEMMESEGES
+## py manage.py runserver
+python manage.py runserver
+python manage.py startapp API
+
+routes = [
+        {
+            'Endpoint': '/received-messages/',
+            'method': 'GET',
+            'body': None,
+            'description': 'Returns an array of received messages'
+        },
+        {
+            'Endpoint': '/add-message/',
+            'method': 'POST',
+            'body': {'body': ""},
+            'description': 'Creates new message with data sent in post request'
+        },
+        {
+            'Endpoint': '/delete-message/id/',
+            'method': 'DELETE',
+            'body': None,
+            'description': 'Deletes and exiting message'
+        },
+    ]
+
+python .\manage.py makemigrations
+python .\manage.py migrate
+
+python .\manage.py createsuperuser
+
+
+python -m pip install djangorestframework
+
+pip show djangorestframework
+
+#add to views.py
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+
+
+==================================
+
+react
+npx create-react-app frontend-sys

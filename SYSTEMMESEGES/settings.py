@@ -12,24 +12,49 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from datetime import timedelta
 from pathlib import Path
 import os
+import environ
 
-# import psycopg as Database
 
-# from psycopg2 import psycopg as Database
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-from dj_database_url import config as db_config
 
-# DATABASES = {'default': db_config(default=os.environ.get('DATABASE_URL'))}
+env = environ.Env()
 
-# DATABASES = {'default': db_config(default=os.environ.get('postgres://sh770_user:5K0fTTQ77js5r92jr0y2LeVLl8UPoFAK@dpg-ck4u5m29hnms739pd5r0-a.oregon-postgres.render.com/sh770'))}
+environ.Env.read_env()
 
-from dotenv import load_dotenv
-load_dotenv()
+
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
+
+
+
+
+
+
+# Database
+# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+
+'''
+DATABASES = {
+    	
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+'''
+
+
+
+import dj_database_url
+
+DATABASES = {
+    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+}
 
 
 # Quick-start development settings - unsuitable for production
@@ -38,17 +63,17 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure-vumrfnkxvxp!3v!3$&^6fu1og0_m$4q8eu1h$9r@kz$=+lz==t'
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
+DEBUG = True
 # DEBUG = False
 
-DEBUG = os.environ.get('DEBUG')
+# DEBUG = os.environ.get('DEBUG')
 
 
 # Raises Django's ImproperlyConfigured
 # exception if SECRET_KEY not in os.environ
 
-ALLOWED_HOSTS = []
-# ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -136,16 +161,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'SYSTEMMESEGES.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-DATABASES = {
-    	
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 
 # Password validation
@@ -194,3 +209,4 @@ CORS_ALLOW_ALL_ORIGINS = True
 #     "https://sh770.github.io",
 #     "http://localhost:3000", 
 # ]
+
