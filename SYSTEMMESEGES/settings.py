@@ -88,6 +88,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
+    'django.contrib.staticfiles'
     ]
 
 REST_FRAMEWORK = {
@@ -206,7 +207,7 @@ STATIC_ROOT = BASE_DIR / 'staic'
 
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# STATICFILES_DIRS = [BASE_DIR / 'static']
+STATICFILES_DIRS = [BASE_DIR / 'static']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
