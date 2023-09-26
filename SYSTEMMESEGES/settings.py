@@ -13,7 +13,7 @@ from datetime import timedelta
 from pathlib import Path
 import os
 import environ
-
+from django.contrib.staticfiles.apps import StaticFilesConfig
 
 
 
@@ -90,7 +90,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
-    # 'django.contrib.staticfiles',
     ]
 
 REST_FRAMEWORK = {
@@ -200,8 +199,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-# STATIC_URL = 'static/'
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
+# STATIC_URL = '/static/'
 
 # MEDIA_URL = '/media/'
 
