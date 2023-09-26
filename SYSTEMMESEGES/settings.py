@@ -65,8 +65,8 @@ DATABASES = {
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure-vumrfnkxvxp!3v!3$&^6fu1og0_m$4q8eu1h$9r@kz$=+lz==t'
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-# DEBUG = False
+# DEBUG = True
+DEBUG = False
 
 # DEBUG = os.environ.get('DEBUG')
 
@@ -202,6 +202,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 # STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']
+
 if not DEBUG:
     # Tell Django to copy statics to the `staticfiles` directory
     # in your application directory on Render.
@@ -216,7 +218,6 @@ if not DEBUG:
 
 # MEDIA_ROOT = BASE_DIR / 'media'
 
-STATICFILES_DIRS = [BASE_DIR / 'static']
 
 # STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
