@@ -64,8 +64,8 @@ DATABASES = {
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure-vumrfnkxvxp!3v!3$&^6fu1og0_m$4q8eu1h$9r@kz$=+lz==t'
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-# DEBUG = False
+# DEBUG = True
+DEBUG = False
 
 # DEBUG = os.environ.get('DEBUG')
 
@@ -206,7 +206,10 @@ STATIC_URL = '/static/'
 
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
+
 # STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
     # Turn on WhiteNoise storage backend that takes care of compressing static files
@@ -232,6 +235,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://meseg.onrender.com",
     "http://localhost:3000", 
     "http://localhost:8082", 
+    "http://127.0.0.1:8000",
 ]
 
 CORS_ALLOW_METHODS = [
